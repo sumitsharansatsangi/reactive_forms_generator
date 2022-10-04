@@ -273,10 +273,12 @@ packages:
   intl:
     dependency: transitive
     description:
-      name: intl
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.17.0"
+      path: "."
+      ref: HEAD
+      resolved-ref: "7639a1588d2b037230e0ace17ab761c05c91f259"
+      url: "https://github.com/dart-lang/intl.git"
+    source: git
+    version: "0.17.1-dev"
   io:
     dependency: transitive
     description:
@@ -399,9 +401,11 @@ packages:
   reactive_forms:
     dependency: transitive
     description:
-      name: reactive_forms
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "."
+      ref: HEAD
+      resolved-ref: "84260b4514c4fde50633a6f2962203f521c3dd3c"
+      url: "https://github.com/sumitsharansatsangi/reactive_forms.git"
+    source: git
     version: "14.1.0"
   reactive_forms_annotations:
     dependency: "direct main"
@@ -416,7 +420,7 @@ packages:
       path: "../packages/reactive_forms_generator"
       relative: true
     source: path
-    version: "0.19.0-beta"
+    version: "0.20.0-beta"
   recase:
     dependency: "direct main"
     description:
@@ -605,5 +609,5 @@ packages:
     source: hosted
     version: "3.1.0"
 sdks:
-  dart: ">=2.17.0 <3.0.0"
+  dart: ">=2.18.2 <3.0.0"
   flutter: ">=3.0.0"

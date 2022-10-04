@@ -1,7 +1,7 @@
 name: reactive_forms_annotations
 description: Annotations for reactive_forms_generator
 repository: https://github.com/artflutter/reactive_forms_generator
-
+publish_to: none
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
 #publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -19,10 +19,11 @@ repository: https://github.com/artflutter/reactive_forms_generator
 version: 0.13.0-beta
 
 environment:
-  sdk: ">=2.17.0 <3.0.0"
+  sdk: ">=2.18.2 <3.0.0"
 
 dependencies:
-  reactive_forms: ^14.1.0
+  reactive_forms:
+    git: https://github.com/sumitsharansatsangi/reactive_forms.git
   flutter:
     sdk: flutter
 

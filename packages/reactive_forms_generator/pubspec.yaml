@@ -18,13 +18,13 @@ repository: https://github.com/artflutter/reactive_forms_generator
 version: 0.20.0-beta
 
 environment:
-  sdk: ">=2.17.0 <3.0.0"
+  sdk: ">=2.18.2 <3.0.0"
 
 dependencies:
   build: ^2.3.1
   source_gen: ^1.2.5
-  analyzer: ^4.6.0
-  path: ^1.8.1
+  analyzer: ^4.7.0
+  path: ^1.8.2
   build_runner: ^2.2.1
   code_builder: ^4.3.0
   dart_style: ^2.2.4
@@ -49,7 +49,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
