@@ -48,6 +48,21 @@ class MailingListFormWidget extends StatelessWidget {
                   )
                 ],
               ),
+              ReactiveTextField<String>(
+                maxLines: 4,
+                formControl: formModel.contentControl,
+                textInputAction: TextInputAction.done,
+                decoration: const InputDecoration(
+                  labelText: 'Content',
+                  helperText: '',
+                  helperStyle: TextStyle(height: 0.7),
+                  errorStyle: TextStyle(height: 0.7),
+                ),
+                showErrors: (_) => true,
+                validationMessages: {
+                  ValidationMessage.required: (_) => 'Required'
+                },
+              ),
               const SizedBox(height: 16),
               ReactiveMailingListFormConsumer(
                 builder: (context, formModel, child) {
@@ -96,7 +111,11 @@ class MailingListFormWidget extends StatelessWidget {
                   ReactiveMailingListFormConsumer(
                     builder: (context, formModel, child) {
                       return ElevatedButton(
-                        onPressed: formModel.form.valid ? () {} : null,
+                        onPressed: formModel.form.valid
+                            ? () {
+                                print(formModel.model.emailList);
+                              }
+                            : null,
                         child: const Text('Submit'),
                       );
                     },

@@ -174,15 +174,28 @@ class MailingListForm implements FormModel<MailingList> {
 
   static String emailListControlName = "emailList";
 
+  static String contentControlName = "content";
+
   final MailingList? mailingList;
 
   final FormGroup form;
 
   final String? path;
 
+  String contentControlPath() => pathBuilder(contentControlName);
   String emailListControlPath() => pathBuilder(emailListControlName);
+  String get _contentValue => contentControl.value ?? "";
   List<String?> get _emailListValue =>
       emailListControl.value?.whereType<String?>().toList() ?? [];
+  bool get containsContent {
+    try {
+      form.control(contentControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   bool get containsEmailList {
     try {
       form.control(emailListControlPath());
@@ -192,14 +205,34 @@ class MailingListForm implements FormModel<MailingList> {
     }
   }
 
+  Object? get contentErrors => contentControl.errors;
   Object? get emailListErrors => emailListControl.errors;
+  void get contentFocus => form.focus(contentControlPath());
   void get emailListFocus => form.focus(emailListControlPath());
+  void contentValueUpdate(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    contentControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void emailListValueUpdate(
     List<String?> value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
     emailListControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void contentValuePatch(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    contentControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -212,6 +245,15 @@ class MailingListForm implements FormModel<MailingList> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  void contentValueReset(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      contentControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
   void emailListValueReset(
     List<String?> value, {
     bool updateParent = true,
@@ -221,8 +263,28 @@ class MailingListForm implements FormModel<MailingList> {
   }) =>
       emailListControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+  FormControl<String> get contentControl =>
+      form.control(contentControlPath()) as FormControl<String>;
   FormArray<String> get emailListControl =>
       form.control(emailListControlPath()) as FormArray<String>;
+  void contentSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      contentControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      contentControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   void emailListSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -287,7 +349,7 @@ class MailingListForm implements FormModel<MailingList> {
         'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
       );
     }
-    return MailingList(emailList: _emailListValue);
+    return MailingList(emailList: _emailListValue, content: _contentValue);
   }
 
   MailingListForm copyWithPath(String? path) {
@@ -339,7 +401,14 @@ class MailingListForm implements FormModel<MailingList> {
             validators: [mailingListValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
-            disabled: false)
+            disabled: false),
+        contentControlName: FormControl<String>(
+            value: mailingList?.content,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false)
       },
           validators: [],
           asyncValidators: [],
