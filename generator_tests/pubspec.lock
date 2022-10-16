@@ -420,7 +420,7 @@ packages:
       path: "../packages/reactive_forms_generator"
       relative: true
     source: path
-    version: "0.20.0-beta"
+    version: "0.21.0-beta+k1"
   recase:
     dependency: "direct main"
     description:
